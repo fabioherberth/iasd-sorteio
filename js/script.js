@@ -50,6 +50,7 @@ btnStart.addEventListener("click", () => {
     divStart.classList.add("d-none");
     divRaffle.classList.remove("d-none");
     divRaffle.classList.add("d-flex");
+    historicalNumbers.innerText = "";
 
 });
 
@@ -79,6 +80,12 @@ function getRandomArbitrary(min, max) {
 function carryOutDraw(firstValue, secondValue) {
 
     if (!isRepeatNumber) {
+        var rangeOfNumbers = secondValue - firstValue; 
+
+        if (drawnNumbers.length > rangeOfNumbers) {
+            return;
+        }
+
         do {
             drawnNumber = getRandomArbitrary(firstValue, secondValue);
         } while (drawnNumbers.indexOf(drawnNumber) > -1);
