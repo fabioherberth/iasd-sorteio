@@ -72,11 +72,12 @@ footer .container {
     border-radius: 16px;
     text-align: center;
     color: #17242D;
-    padding: 2em;
+    padding: 1rem 2rem;
+    font-size: 48px;
 }
 
 #raffleNumber {
-    font-size: 128px;
+    font-size: 181px;
     color: #17242D;
     font-weight: bold;
 }

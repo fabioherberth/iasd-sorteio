@@ -73,9 +73,10 @@ btnStart.addEventListener("click", () => {
 btnRaffle.addEventListener("click", () => {
     var firstValue = parseInt(localStorage.getItem("first-value"));
     var secondValue = parseInt(localStorage.getItem("second-value"));
-    var secondValue = parseInt(localStorage.getItem("second-value"));
-    
-    carryOutDraw(firstValue, secondValue);
+    drawnNumbers = localStorage.getItem("historical-numbers") ? localStorage.getItem("historical-numbers").split(',').map(Number) : [];
+    if(drawnNumbers.length < secondValue){
+        carryOutDraw(firstValue, secondValue);
+    }
 
 });
 
@@ -110,7 +111,7 @@ function carryOutDraw(firstValue, secondValue) {
 
         do {
             drawnNumber = getRandomArbitrary(firstValue, secondValue);
-        } while (drawnNumbers.indexOf(drawnNumber) > -1);
+        } while (drawnNumbers.indexOf(drawnNumber) >= 0);
     } else {
         drawnNumber = getRandomArbitrary(firstValue, secondValue);
     }
@@ -120,8 +121,10 @@ function carryOutDraw(firstValue, secondValue) {
 }
 
 function saveHistory() {
-    drawnNumbers = localStorage.getItem("historical-numbers") ? localStorage.getItem("historical-numbers").split(',') : [];
-    drawnNumbers.push(drawnNumber);
+    drawnNumbers = localStorage.getItem("historical-numbers") ? localStorage.getItem("historical-numbers").split(',').map(Number) : [];
+    if(drawnNumbers.length < nmrEnd.value && drawnNumbers.indexOf(drawnNumber)){
+        drawnNumbers.push(drawnNumber);
+    }
     if(drawnNumbers.length > 0) {
         localStorage.setItem("drawn-number", drawnNumber);
         localStorage.setItem("historical-numbers", drawnNumbers);
