@@ -13,13 +13,27 @@ let drawnNumbers = [];
 let drawnNumber = 0;
 let isRepeatNumber = false;
 
+if(localStorage.getItem("started")) {
+    nmrStart.value = localStorage.getItem("first-value");
+    nmrEnd.value = localStorage.getItem("second-value");
+    divStart.classList.remove("d-flex");
+    divStart.classList.add("d-none");
+    divRaffle.classList.remove("d-none");
+    divRaffle.classList.add("d-flex");
+    let historical = localStorage.getItem("historical-numbers");
+    if(historical){
+        divRaffleNumber.innerHTML = localStorage.getItem("drawn-number");
+        historicalNumbers.innerText = historical.replaceAll(",", " - ");
+    }
+}
+
 checkboxRepeat.addEventListener("click", () => {
     isRepeatNumber = checkboxRepeat.checked;
 });
 
 btnStart.addEventListener("click", () => {
-    var firstValue = parseInt(nmrStart.value);
-    var secondValue = parseInt(nmrEnd.value);
+    let firstValue = parseInt(nmrStart.value);
+    let secondValue = parseInt(nmrEnd.value);
 
     if (firstValue <= 0) {
         alert("O número inicial deve ser maior que 0!");
@@ -30,17 +44,18 @@ btnStart.addEventListener("click", () => {
         alert("O número final deve ser maior que 0!");
         return;
     }
-
+    
     if (firstValue > secondValue) {
         alert("O número inicial deve ser menor que o número final!");
         return;
     }
-
+    
     if (firstValue == secondValue) {
         alert("Para ter o sorteio o número inicial deve ser menor que o número final!");
         return;
     }
-
+    
+    localStorage.setItem("started", true);
     localStorage.setItem("first-value", firstValue);
     localStorage.setItem("second-value", secondValue);
 
@@ -51,11 +66,13 @@ btnStart.addEventListener("click", () => {
     divRaffle.classList.remove("d-none");
     divRaffle.classList.add("d-flex");
     historicalNumbers.innerText = "";
+    
 
 });
 
 btnRaffle.addEventListener("click", () => {
     var firstValue = parseInt(localStorage.getItem("first-value"));
+    var secondValue = parseInt(localStorage.getItem("second-value"));
     var secondValue = parseInt(localStorage.getItem("second-value"));
     
     carryOutDraw(firstValue, secondValue);
@@ -70,7 +87,12 @@ btnClear.addEventListener("click", () => {
     historicalNumbers.innerText = "";
     nmrStart.value = 1;
     nmrEnd.value = 100;
-    localStorage.clear();
+    localStorage.removeItem("first-value");
+    localStorage.removeItem("second-value");
+    localStorage.removeItem("historical-numbers");
+    localStorage.removeItem("started");
+    localStorage.removeItem("drawn-number");
+    drawnNumbers = [];
 });
 
 function getRandomArbitrary(min, max) {
@@ -98,9 +120,10 @@ function carryOutDraw(firstValue, secondValue) {
 }
 
 function saveHistory() {
+    drawnNumbers = localStorage.getItem("historical-numbers") ? localStorage.getItem("historical-numbers").split(',') : [];
     drawnNumbers.push(drawnNumber);
-
     if(drawnNumbers.length > 0) {
+        localStorage.setItem("drawn-number", drawnNumber);
         localStorage.setItem("historical-numbers", drawnNumbers);
     }
 
