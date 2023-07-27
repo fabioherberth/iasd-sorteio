@@ -1,77 +1,77 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IASD - Sorteio</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-    <link href="./css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <section>
-        <div class="container my-5">
-            <div class="row pt-4 d-flex text-center">
-                <div class="col-12 col-md-8 justify-content-center">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="./img/logo_eu_vou.png" class="img-fluid mb-3" alt="Logo EU VOU">
-                            <img src="./img/logo_ja.png" class="img-fluid mx-5 mb-3" alt="Logo JA">
-                            <img src="./img/logo_iasd.png" class="img-fluid mb-3" alt="Logo IASD">
-                        </div>
-                    </div>
-                    <div class="row mt-5 pt-2 d-flex justify-content-center" id="divStart">
-                        <div class="col-12 col-md-6 col-lg-5">
-                            <label for="nmrStart">Número incial</label>
-                            <input type="number" class="input-number" value="1" id="nmrStart">
-                        </div>
-                        <div class="col-12 col-md-6 col-lg-5">
-                            <label for="nmrEnd">Número final</label>
-                            <input type="number" class="input-number" value="100" id="nmrEnd">
-                        </div>
-                        <div class="col-auto my-4">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="nmrRepeat">
-                                <label class="form-check-label" for="nmrRepeat">
-                                    Permitir números repetidos?
-                                </label>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>IASD - Sorteio</title>
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <section>
+            <div class="container my-5">
+                <div class="row pt-4 d-flex text-center">
+                    <div class="col-12 col-md-8 justify-content-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="./img/logo_eu_vou.png" class="img-fluid mb-3" alt="Logo EU VOU">
+                                <img src="./img/logo_ja.png" class="img-fluid mx-5 mb-3" alt="Logo JA">
+                                <img src="./img/logo_iasd.png" class="img-fluid mb-3" alt="Logo IASD">
                             </div>
                         </div>
-                        <div class="col-10">
-                            <button type="button" id="btnStart" class="btn-raffle">Sortear</button>
+                        <div class="row mt-5 pt-2 d-flex justify-content-center" id="divStart">
+                            <div class="col-12 col-md-6 col-lg-5">
+                                <label for="nmrStart">Número incial</label>
+                                <input type="number" class="input-number" value="1" id="nmrStart">
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-5">
+                                <label for="nmrEnd">Número final</label>
+                                <input type="number" class="input-number" value="100" id="nmrEnd">
+                            </div>
+                            <div class="col-auto my-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="nmrRepeat">
+                                    <label class="form-check-label" for="nmrRepeat">
+                                        Permitir números repetidos?
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <button type="button" id="btnStart" class="btn-raffle">Sortear</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-5 pt-2 d-none justify-content-center" id="divRaffle">
-                        <div class="col-12">
-                            <div id="raffleNumber">0</div>
+                        <div class="row mt-5 pt-2 d-none justify-content-center" id="divRaffle">
+                            <div class="col-12">
+                                <div id="raffleNumber">0</div>
+                            </div>
+                            <div class="col-10 mt-2">
+                                <button type="button" id="btnRaffle" class="btn-raffle">Próximo número</button>
+                            </div>
                         </div>
-                        <div class="col-10 mt-2">
-                            <button type="button" id="btnRaffle" class="btn-raffle">Próximo número</button>
-                        </div>
-                    </div>
-                    <div class="row pt-2 justify-content-center">
-                        <div class="col-12 mt-4 mb-5">
-                            <button type="button" class="btn btn-white w-auto" id="btnClear">Recomeçar</button>
-                        </div>
-                        <div class="col-10 my-5">
-                            <label for="">Histórico de números sorteados</label>
-                            <div class="historical">
-                                <div id="historicalNumbers"></div>
+                        <div class="row pt-2 justify-content-center">
+                            <div class="col-12 mt-4 mb-5">
+                                <button type="button" class="btn btn-white w-auto" id="btnClear">Recomeçar</button>
+                            </div>
+                            <div class="col-10 my-5">
+                                <label for="">Histórico de números sorteados</label>
+                                <div class="historical">
+                                    <div id="historicalNumbers"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <img src="./img/cartaz.svg" class="img-fluid border-radius-16" alt="Imagem evento">
+                    <div class="col-12 col-md-4">
+                        <img src="./img/cartaz.svg" class="img-fluid border-radius-16" alt="Imagem evento">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <footer>
-        <div class="container d-flex justify-content-center align-items-center">
-            <p>IASD - Sistema de sorteio</p>
-        </div>
-    </footer>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/script.js"></script>
-  </body>
+        </section>
+        <footer>
+            <div class="container d-flex justify-content-center align-items-center">
+                <p>IASD - Sistema de sorteio</p>
+            </div>
+        </footer>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/script.js"></script>
+    </body>
 </html>
