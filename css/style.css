@@ -33,8 +33,10 @@ label {
 }
 
 .btn-white {
+    outline: none !important;
     color: #747C81;
     font-weight: bold;
+    padding: 1rem;
 }
 
 .btn-raffle {

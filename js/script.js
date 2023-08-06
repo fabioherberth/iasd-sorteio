@@ -4,6 +4,7 @@ const checkboxRepeat = document.getElementById("nmrRepeat");
 const btnStart = document.getElementById("btnStart");
 const btnRaffle = document.getElementById("btnRaffle");
 const btnClear = document.getElementById("btnClear");
+const btnChange = document.getElementById("btnChange");
 const divStart = document.getElementById("divStart");
 const divRaffle = document.getElementById("divRaffle");
 const divRaffleNumber = document.getElementById("raffleNumber");
@@ -14,15 +15,15 @@ let drawnNumber = 0;
 let isRepeatNumber = false;
 
 if(localStorage.getItem("started")) {
-    nmrStart.value = localStorage.getItem("first-value");
-    nmrEnd.value = localStorage.getItem("second-value");
     divStart.classList.remove("d-flex");
     divStart.classList.add("d-none");
     divRaffle.classList.remove("d-none");
     divRaffle.classList.add("d-flex");
+    nmrStart.value = localStorage.getItem("first-value");
+    nmrEnd.value = localStorage.getItem("second-value");
     let historical = localStorage.getItem("historical-numbers");
     if(historical){
-        divRaffleNumber.innerHTML = localStorage.getItem("drawn-number");
+        divRaffleNumber.innerText = localStorage.getItem("drawn-number");
         historicalNumbers.innerText = historical.replaceAll(",", " - ");
     }
 }
@@ -58,21 +59,16 @@ btnStart.addEventListener("click", () => {
     localStorage.setItem("started", true);
     localStorage.setItem("first-value", firstValue);
     localStorage.setItem("second-value", secondValue);
+    showRaffle();
 
     carryOutDraw(firstValue, secondValue);
 
-    divStart.classList.remove("d-flex");
-    divStart.classList.add("d-none");
-    divRaffle.classList.remove("d-none");
-    divRaffle.classList.add("d-flex");
-    historicalNumbers.innerText = "";
-    
 
 });
 
 btnRaffle.addEventListener("click", () => {
-    var firstValue = parseInt(localStorage.getItem("first-value"));
-    var secondValue = parseInt(localStorage.getItem("second-value"));
+    let firstValue = parseInt(localStorage.getItem("first-value"));
+    let secondValue = parseInt(localStorage.getItem("second-value"));
     drawnNumbers = localStorage.getItem("historical-numbers") ? localStorage.getItem("historical-numbers").split(',').map(Number) : [];
     if(drawnNumbers.length < secondValue){
         carryOutDraw(firstValue, secondValue);
@@ -81,10 +77,6 @@ btnRaffle.addEventListener("click", () => {
 });
 
 btnClear.addEventListener("click", () => {
-    divRaffle.classList.remove("d-flex");
-    divRaffle.classList.add("d-none");
-    divStart.classList.remove("d-none");
-    divStart.classList.add("d-flex");
     historicalNumbers.innerText = "";
     nmrStart.value = 1;
     nmrEnd.value = 100;
@@ -94,6 +86,11 @@ btnClear.addEventListener("click", () => {
     localStorage.removeItem("started");
     localStorage.removeItem("drawn-number");
     drawnNumbers = [];
+    showStart();
+});
+
+btnChange.addEventListener("click", () => {
+    showStart();
 });
 
 function getRandomArbitrary(min, max) {
@@ -101,7 +98,6 @@ function getRandomArbitrary(min, max) {
 }
 
 function carryOutDraw(firstValue, secondValue) {
-
     if (!isRepeatNumber) {
         var rangeOfNumbers = secondValue - firstValue; 
 
@@ -115,8 +111,7 @@ function carryOutDraw(firstValue, secondValue) {
     } else {
         drawnNumber = getRandomArbitrary(firstValue, secondValue);
     }
-
-    divRaffleNumber.innerHTML = drawnNumber;
+    divRaffleNumber.innerText = drawnNumber;
     saveHistory();
 }
 
@@ -129,6 +124,19 @@ function saveHistory() {
         localStorage.setItem("drawn-number", drawnNumber);
         localStorage.setItem("historical-numbers", drawnNumbers);
     }
+    historicalNumbers.innerText = drawnNumbers.join(" - ");
+}
 
-    historicalNumbers.innerHTML = drawnNumbers.join(" - ");
+function showRaffle() {
+    divStart.classList.remove("d-flex");
+    divStart.classList.add("d-none");
+    divRaffle.classList.remove("d-none");
+    divRaffle.classList.add("d-flex");
+}
+
+function showStart() {
+    divRaffle.classList.remove("d-flex");
+    divRaffle.classList.add("d-none");
+    divStart.classList.remove("d-none");
+    divStart.classList.add("d-flex");
 }
