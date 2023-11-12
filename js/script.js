@@ -34,7 +34,8 @@ btnStart.addEventListener("click", () => {
     let request = new Request(url, {
         method: 'GET',
         headers: new Headers({
-            "Content-Type": "application/json; charset=UTF-8"
+            "Content-Type": "application/json; charset=UTF-8",
+            "Content-Security-Policy": "upgrade-insecure-requests"
         })
     });
 
