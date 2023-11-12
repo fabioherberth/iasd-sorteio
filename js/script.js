@@ -30,7 +30,7 @@ btnStart.addEventListener("click", () => {
 
     iptNameOfTheWinner.value = "Buscando...";
     //const url = "http://church-api.ddns.net:8090/draw/event/1";
-    const url = "church-api.ddns.net:8090/draw/event/1";
+    const url = "//church-api.ddns.net:8090/draw/event/1";
 
     let request = new Request(url, {
         method: 'GET',
